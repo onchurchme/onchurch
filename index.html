@@ -260,6 +260,8 @@
   }
   .chat-fab:hover{background:var(--accent-strong)}
   .chat-fab svg{width:19px;height:19px}
+  /* 소요리문답 플로팅 버튼 — 새가족 안내 버튼 바로 위 */
+  .cat-fab{bottom:calc(78px + env(safe-area-inset-bottom));z-index:59}
   .chat-panel{
     position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:60;
     width:min(392px,calc(100vw - 24px));height:min(600px,calc(100dvh - 120px));
@@ -933,6 +935,11 @@
   <span class="en" lang="en" style="margin-top:2px">Seoul, South Korea · All gatherings are held online.</span>
 </footer>
 
+<button class="chat-fab cat-fab" id="catFab" type="button" aria-haspopup="dialog">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+  소요리문답
+</button>
+
 <button class="chat-fab" id="chatFab" type="button" aria-haspopup="dialog" aria-expanded="false">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   새가족 안내
@@ -1035,6 +1042,9 @@
   }
   var missionModal = setupModal('missionOpen', 'missionModal', 'missionClose');
   var catModal = setupModal('catOpen', 'catechismModal', 'catClose');
+  /* 오른쪽 아래 소요리문답 플로팅 버튼 — 기존 소요리문답 창을 연다 */
+  var catFab = document.getElementById('catFab');
+  if (catFab) catFab.addEventListener('click', function(e){ catModal.open(e); });
   var offerModal = setupModal('offerOpen', 'offerModal', 'offerClose');
   var bibleModal = setupModal('bibleOpen', 'bibleModal', 'bibleClose');
   /* 목요 줌 기도회: 열 때 찬양 영상을 불러오고, 닫으면 영상 주소를 비워 소리가 멈추게 한다 */
