@@ -443,12 +443,18 @@
       <div class="menu-item" id="wordItem">
         <a href="#word" id="wordMenu" aria-haspopup="true" aria-expanded="false" aria-controls="wordSubmenu">매일 카톡 말씀<span class="caret" aria-hidden="true"></span></a>
         <div class="submenu" id="wordSubmenu">
+          <a href="#word" id="wordOpen">매일 카톡 말씀</a>
           <a href="#bible" id="bibleOpen">성경 읽기</a>
         </div>
       </div>
       <a href="#prayer" id="prayerOpen">목요 줌 기도회</a>
-      <a href="#offering" id="offerOpen">헌금안내</a>
-      <a href="#mission" id="missionOpen">돕는선교</a>
+      <div class="menu-item" id="offerItem">
+        <a href="#offering" id="offerMenu" aria-haspopup="true" aria-expanded="false" aria-controls="offerSubmenu">헌금안내<span class="caret" aria-hidden="true"></span></a>
+        <div class="submenu" id="offerSubmenu">
+          <a href="#offering" id="offerOpen">헌금 안내</a>
+          <a href="#mission" id="missionOpen">돕는선교</a>
+        </div>
+      </div>
       <a href="#catechism" id="catOpen">소요리문답</a>
       <a href="#contact">문의하기</a>
     </div>
@@ -926,14 +932,14 @@
 
 <button class="chat-fab" id="chatFab" type="button" aria-haspopup="dialog" aria-expanded="false">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  궁금해요
+  새가족 안내
 </button>
 
-<div class="chat-panel" id="chatPanel" role="dialog" aria-label="온교회 궁금해요 챗봇">
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="온교회 새가족 안내 챗봇">
   <div class="chat-head">
     <div class="chat-mark" aria-hidden="true">온</div>
     <div>
-      <h3>온교회 궁금해요<span class="en2" lang="en">On Church Guide</span></h3>
+      <h3>온교회 새가족 안내<span class="en2" lang="en">On Church Guide</span></h3>
       <p>궁금한 것을 편하게 물어보세요 · <span lang="en">English is welcome, too.</span></p>
     </div>
     <button class="chat-close" id="chatClose" type="button" aria-label="챗봇 닫기">✕</button>
@@ -1067,8 +1073,9 @@
     wordMenu.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
   if (wordMenu && wordItem){
-    wordMenu.addEventListener('click', function(){
-      /* 링크 이동(#word 섹션)은 그대로 두고, 하위 메뉴만 펼치거나 접는다 */
+    wordMenu.addEventListener('click', function(e){
+      /* 바로 섹션으로 이동하지 않고, 하위 메뉴만 펼치거나 접는다 */
+      e.preventDefault();
       setWordSubmenu(!wordItem.classList.contains('open'));
     });
     document.addEventListener('click', function(e){
@@ -1077,8 +1084,36 @@
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape') setWordSubmenu(false);
     });
+    var wordOpenLink = document.getElementById('wordOpen');
+    if (wordOpenLink) wordOpenLink.addEventListener('click', function(){ setWordSubmenu(false); });
     var bibleOpenLink = document.getElementById('bibleOpen');
     if (bibleOpenLink) bibleOpenLink.addEventListener('click', function(){ setWordSubmenu(false); });
+  }
+
+  /* ---------- 헌금안내 하위 메뉴 (돕는선교 펼치기/접기) ---------- */
+  var offerItem = document.getElementById('offerItem');
+  var offerMenu = document.getElementById('offerMenu');
+  function setOfferSubmenu(open){
+    if (!offerItem || !offerMenu) return;
+    offerItem.classList.toggle('open', open);
+    offerMenu.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (offerMenu && offerItem){
+    offerMenu.addEventListener('click', function(e){
+      /* 바로 창을 열지 않고, 하위 메뉴만 펼치거나 접는다 */
+      e.preventDefault();
+      setOfferSubmenu(!offerItem.classList.contains('open'));
+    });
+    document.addEventListener('click', function(e){
+      if (!offerItem.contains(e.target)) setOfferSubmenu(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') setOfferSubmenu(false);
+    });
+    var offerOpenLink = document.getElementById('offerOpen');
+    if (offerOpenLink) offerOpenLink.addEventListener('click', function(){ setOfferSubmenu(false); });
+    var missionOpenLink = document.getElementById('missionOpen');
+    if (missionOpenLink) missionOpenLink.addEventListener('click', function(){ setOfferSubmenu(false); });
   }
 
   /* ---------- Catechism search ---------- */
