@@ -120,10 +120,8 @@
   #worship .photo{max-width:940px}
   #worship .apply-box{max-width:760px;margin-left:auto;margin-right:auto}
   .photo-overlay{position:relative}
-  .photo-overlay .worship-img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 32%;filter:blur(1.6px) brightness(.97);transform:scale(1.03)}
-  @media (max-width:640px){
-    .photo-overlay .worship-img{aspect-ratio:4/5;object-position:center 30%}
-  }
+  /* 주일 줌 예배 사진은 자르지 않고 원본 비율 그대로 전체 표시 */
+  .photo-overlay .worship-img{display:block;width:100%;height:auto}
   .photo-overlay .time-overlay{
     position:absolute;top:0;left:0;right:0;
     padding:22px 20px 34px;text-align:center;color:#fff;
