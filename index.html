@@ -122,6 +122,21 @@
   .photo-overlay{position:relative}
   /* 주일 줌 예배 사진은 자르지 않고 원본 비율 그대로 전체 표시 */
   .photo-overlay .worship-img{display:block;width:100%;height:auto}
+  /* 지하철이 움직이는 듯한 미세한 흔들림 — 사진과 글씨 오버레이가 함께, 확대·자르기 없이 */
+  #worship .photo-overlay{
+    animation:worshipSway 7s ease-in-out infinite alternate;
+    will-change:transform;
+  }
+  @keyframes worshipSway{
+    0%{transform:translate(0,0) rotate(0deg)}
+    25%{transform:translate(2.5px,-1.5px) rotate(.22deg)}
+    50%{transform:translate(-1.5px,1.5px) rotate(-.18deg)}
+    75%{transform:translate(-2.5px,-1px) rotate(.14deg)}
+    100%{transform:translate(1.5px,2px) rotate(-.22deg)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    #worship .photo-overlay{animation:none}
+  }
   .photo-overlay .time-overlay{
     position:absolute;top:0;left:0;right:0;
     padding:22px 20px 34px;text-align:center;color:#fff;
