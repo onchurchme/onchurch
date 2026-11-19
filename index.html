@@ -419,6 +419,23 @@
     .welcome-sheep,.sheep-eyes{animation:none}
   }
 
+  /* 마우스 커서를 살짝 늦게 따라다니는 작은 양 (클릭 방해 없음) */
+  .cursor-sheep{
+    position:fixed;left:0;top:0;z-index:101;
+    width:54px;height:auto;
+    pointer-events:none;
+    opacity:0;transition:opacity .4s ease;
+    will-change:transform;
+  }
+  .cursor-sheep.on{opacity:1}
+  .cursor-sheep svg{
+    display:block;width:100%;height:auto;
+    filter:drop-shadow(0 3px 6px rgba(35,33,30,.14));
+    animation:sheepBob 2.8s ease-in-out infinite;
+  }
+  @media (pointer:coarse){ .cursor-sheep{display:none} }
+  @media (prefers-reduced-motion:reduce){ .cursor-sheep{display:none} }
+
   /* Prayer room (기도실) */
   .room-modal{padding:12px}
   .room-card{
@@ -671,6 +688,29 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="cursor-sheep" id="cursorSheep" aria-hidden="true">
+  <svg viewBox="0 0 200 178" focusable="false">
+    <ellipse cx="58" cy="90" rx="13" ry="8" transform="rotate(-24 58 90)" fill="#facd9f"/>
+    <ellipse cx="142" cy="90" rx="13" ry="8" transform="rotate(24 142 90)" fill="#facd9f"/>
+    <rect x="68" y="70" width="64" height="68" rx="27" fill="#f9c795"/>
+    <g fill="#fef3d8">
+      <circle cx="70" cy="64" r="15"/>
+      <circle cx="88" cy="53" r="17"/>
+      <circle cx="109" cy="52" r="17"/>
+      <circle cx="128" cy="62" r="15"/>
+      <circle cx="100" cy="62" r="16"/>
+      <circle cx="146" cy="76" r="11"/>
+      <circle cx="54" cy="76" r="11"/>
+    </g>
+    <g class="sheep-eyes" fill="#33261c">
+      <circle cx="86" cy="102" r="3.2"/>
+      <circle cx="114" cy="102" r="3.2"/>
+    </g>
+    <circle cx="100" cy="114" r="3" fill="#33261c"/>
+    <path d="M160 57c-8-7-13-11-13-16.5C147 36 150.5 33 154.5 33c2.5 0 4.5 1.3 5.5 3 1-1.7 3-3 5.5-3 4 0 7.5 3 7.5 7.5C173 46 168 50 160 57z" fill="#f06a9b"/>
+  </svg>
 </div>
 
 <nav class="nav" aria-label="메뉴">
@@ -1369,12 +1409,13 @@
   var welcomeOverlay = document.getElementById('welcomeOverlay');
   var welcomeClose = document.getElementById('welcomeClose');
   var welcomeAutoTimer = null;
+  var sheepReady = false;
   function closeWelcome(){
     if (!welcomeOverlay) return;
     if (welcomeOverlay.classList.contains('hidden') || welcomeOverlay.classList.contains('fading')) return;
     if (welcomeAutoTimer) { clearTimeout(welcomeAutoTimer); welcomeAutoTimer = null; }
     welcomeOverlay.classList.add('fading');
-    setTimeout(function(){ welcomeOverlay.classList.add('hidden'); }, 480);
+    setTimeout(function(){ welcomeOverlay.classList.add('hidden'); sheepReady = true; }, 480);
   }
   if (welcomeClose) welcomeClose.addEventListener('click', closeWelcome);
   if (welcomeOverlay) welcomeOverlay.addEventListener('click', function(e){
@@ -1386,6 +1427,38 @@
   if (welcomeClose) welcomeClose.focus();
   /* 1초 뒤 자동으로 부드럽게 사라짐 */
   welcomeAutoTimer = setTimeout(closeWelcome, 2500);
+
+  /* ---------- 팝업이 사라진 뒤, 마우스 커서를 살짝 늦게 따라다니는 작은 양과 하트 ---------- */
+  var cursorSheep = document.getElementById('cursorSheep');
+  if (cursorSheep && window.matchMedia && window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var sheepTX = window.innerWidth / 2, sheepTY = window.innerHeight / 2;
+    var sheepX = sheepTX, sheepY = sheepTY;
+    var sheepShown = false, sheepRaf = null;
+    function sheepStep(){
+      sheepX += (sheepTX - sheepX) * 0.07;
+      sheepY += (sheepTY - sheepY) * 0.07;
+      cursorSheep.style.transform = 'translate(' + (sheepX - 27) + 'px,' + (sheepY - 72) + 'px)';
+      if (Math.abs(sheepTX - sheepX) > 0.3 || Math.abs(sheepTY - sheepY) > 0.3) {
+        sheepRaf = requestAnimationFrame(sheepStep);
+      } else {
+        sheepRaf = null;
+      }
+    }
+    document.addEventListener('mousemove', function(e){
+      sheepTX = e.clientX; sheepTY = e.clientY;
+      if (!sheepReady) { sheepX = sheepTX; sheepY = sheepTY; return; }
+      if (!sheepShown) {
+        sheepShown = true;
+        sheepX = sheepTX; sheepY = sheepTY;
+        cursorSheep.classList.add('on');
+      }
+      if (!sheepRaf) sheepRaf = requestAnimationFrame(sheepStep);
+    }, { passive: true });
+    document.addEventListener('mouseleave', function(){
+      cursorSheep.classList.remove('on');
+      sheepShown = false;
+    });
+  }
 
   /* ---------- 성경 읽기 · 목요 줌 기도회 · 헌금안내 · 돕는선교 · 소요리문답 모달 ---------- */
   function setupModal(openId, modalId, closeId, hooks){
