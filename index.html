@@ -86,7 +86,7 @@
 
   /* Hero */
   .hero{position:relative;text-align:center;color:#fff}
-  .hero img{width:100%;height:min(78vh,640px);object-fit:cover}
+  .hero img{width:100%;height:min(70vh,580px);object-fit:cover}
   .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,16,13,.28),var(--hero-shade) 78%)}
   .hero-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
   .hero .kicker{font-size:10px;letter-spacing:.5em;font-weight:500;color:rgba(255,255,255,.85);margin:0 0 18px;text-indent:.5em}
@@ -112,31 +112,16 @@
   .sec-h{font-family:"Noto Serif KR",serif;font-size:clamp(19.5px,4vw,24.5px);font-weight:700;margin:0 0 18px;line-height:1.45}
   .lead{font-size:14.5px;line-height:1.85;margin:0}
   .small{font-size:13px;color:var(--text-soft);line-height:1.85;margin:14px 0 0}
-  .photo{border-radius:14px;overflow:hidden;margin:0 auto 34px;max-width:760px}
+  .photo{border-radius:14px;overflow:hidden;margin:0 auto 34px;max-width:680px}
   .photo img{width:100%;height:auto}
-  .photo-sm{max-width:560px}
+  .photo-sm{max-width:500px}
   /* 주일 줌 예배 사진은 조금 더 크게 */
-  #worship .sec-in{max-width:980px}
-  #worship .photo{max-width:940px}
+  #worship .sec-in{max-width:900px}
+  #worship .photo{max-width:850px}
   #worship .apply-box{max-width:760px;margin-left:auto;margin-right:auto}
   .photo-overlay{position:relative}
   /* 주일 줌 예배 사진은 자르지 않고 원본 비율 그대로 전체 표시 */
   .photo-overlay .worship-img{display:block;width:100%;height:auto}
-  /* 지하철이 움직이는 듯한 미세한 흔들림 — 사진과 글씨 오버레이가 함께, 확대·자르기 없이 */
-  #worship .photo-overlay{
-    animation:worshipSway 7s ease-in-out infinite alternate;
-    will-change:transform;
-  }
-  @keyframes worshipSway{
-    0%{transform:translate(0,0) rotate(0deg)}
-    25%{transform:translate(2.5px,-1.5px) rotate(.22deg)}
-    50%{transform:translate(-1.5px,1.5px) rotate(-.18deg)}
-    75%{transform:translate(-2.5px,-1px) rotate(.14deg)}
-    100%{transform:translate(1.5px,2px) rotate(-.22deg)}
-  }
-  @media (prefers-reduced-motion: reduce){
-    #worship .photo-overlay{animation:none}
-  }
   .photo-overlay .time-overlay{
     position:absolute;top:0;left:0;right:0;
     padding:22px 20px 34px;text-align:center;color:#fff;
