@@ -271,14 +271,14 @@
     text-align:center;padding:9px 6px;margin:0 0 10px;
   }
   .trio-photo{position:relative;aspect-ratio:3/4;background:#fff}
-  /* 원래 사진으로 되돌리고 톤은 더 낮췄다: 채도와 대비를 한 단계 더 줄여 더 차분하고 부드럽게 */
-  .trio-photo img{width:100%;height:100%;object-fit:cover;display:block;background:#fff;filter:saturate(.64) brightness(1.06) contrast(.88)}
+  /* 원래 사진 그대로 선명하게 — 필터 없이 원본 톤으로 표시 */
+  .trio-photo img{width:100%;height:100%;object-fit:cover;display:block;background:#fff}
   .trio-title{
     position:absolute;top:0;left:0;right:0;
-    padding:15px 10px 30px;text-align:center;color:var(--accent-strong);
+    padding:15px 10px 30px;text-align:center;color:#ffffff;
     font-family:'UPeopleGothic','유앤피플 고딕 UNI','UNPEOPLE Gothic UNI','유앤피플 고딕체','UNPEOPLE Gothic',"Noto Serif KR",serif;font-weight:700;font-size:clamp(14px,2.4vw,18px);line-height:1.4;
-    background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,0));
-    text-shadow:none;
+    background:linear-gradient(180deg,rgba(0,0,0,.32),rgba(0,0,0,0));
+    text-shadow:0 1px 8px rgba(0,0,0,.55),0 0 2px rgba(0,0,0,.35);
   }
   .trio-title .sub{
     display:block;font-family:'UPeopleGothic','유앤피플 고딕 UNI','UNPEOPLE Gothic UNI','유앤피플 고딕체','UNPEOPLE Gothic',"Noto Sans KR",sans-serif;font-weight:500;
@@ -938,8 +938,8 @@
             <span class="trio-title">목요 라이브 기도회<span class="sub">매주 목요일 밤 10시 · Live로 함께 기도</span></span>
           </div>
           <figcaption>
-            <p class="trio-caption-ko">기도 제목을 남겨 주신 분들을 위한 라이브 기도회입니다. 매주 목요일 밤 10시에 함께 기도합니다.</p>
-            <span class="trio-photo-en" lang="en">A live prayer meeting for those who have left a prayer request. We pray together every Thursday at 10 PM.</span>
+            <p class="trio-caption-ko">기도 제목을 남겨 주신 분들을 위한 라이브 기도회입니다.</p>
+            <span class="trio-photo-en" lang="en">A live prayer meeting for those who have left a prayer request.</span>
           </figcaption>
         </figure>
         <figure class="trio-item">
