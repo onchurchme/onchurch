@@ -1068,9 +1068,19 @@
     <p class="lead">동네 이름을 입력하면, 그 동네에 등록된 교회를 전국 지도와 함께 바로 보여 드립니다.
       <span class="en" lang="en">Type your neighborhood, and the registered churches there appear right away, on a map of Korea.</span>
     </p>
+    <p class="small" style="text-align:center;color:#2f5d4a;font-weight:700">추후 교단별·노회별·지역별로 교회를 분류합니다.
+      <span class="en" lang="en">Churches will later be organized by denomination, presbytery, and region.</span>
+    </p>
+    <form class="chat-form" id="nbForm" style="padding:16px 0 0">
+      <label class="sr-only" for="nbInput">동네 이름 입력 · Type your neighborhood</label>
+      <input id="nbInput" type="text" placeholder="동네 이름을 입력하세요 · e.g. 종로, 강남, Bundang" autocomplete="off" maxlength="60">
+      <button class="chat-send" type="submit" aria-label="검색 · Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+    </form>
     <div class="nb-body" id="nbBody">
-      <p class="small" style="margin-top:2px;text-align:center">어느 동네 교회를 찾으세요? 아래 입력창에 동네 이름(예: 종로, 강남, 분당, 해운대)을 입력하면 바로 나열해 드려요.
-        <span class="en" lang="en">Which neighborhood are you looking in? Type its name below — Jongno, Gangnam, Bundang or Haeundae, for example — and the churches there will show up right away.</span>
+      <p class="small" style="margin-top:2px;text-align:center">어느 동네 교회를 찾으세요? 위 입력창에 동네 이름(예: 종로, 강남, 분당, 해운대)을 입력하면 바로 나열해 드려요.
+        <span class="en" lang="en">Which neighborhood are you looking in? Type its name above — Jongno, Gangnam, Bundang or Haeundae, for example — and the churches there will show up right away.</span>
       </p>
       <div class="nb-mapwrap">
         <div id="nbMap" role="img" aria-label="등록된 교회가 표시된 전국 지도"></div>
@@ -1094,13 +1104,6 @@
         <button type="button" class="chip" data-q="전체">등록된 교회 전체</button>
       </div>
     </div>
-    <form class="chat-form" id="nbForm" style="padding:12px 0 0">
-      <label class="sr-only" for="nbInput">동네 이름 입력 · Type your neighborhood</label>
-      <input id="nbInput" type="text" placeholder="동네 이름을 입력하세요 · e.g. 종로, 강남, Bundang" autocomplete="off" maxlength="60">
-      <button class="chat-send" type="submit" aria-label="검색 · Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      </button>
-    </form>
   </div>
 </div>
 
