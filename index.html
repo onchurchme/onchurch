@@ -93,9 +93,9 @@
   .guide-insta svg{width:34px;height:34px;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.18))}
   /* 인스타그램 아이콘 위에 얹는 카카오톡 아이콘 — 누르면 카카오톡
      오픈채팅으로 이어진다. 인스타그램과 같은 자리(오른쪽 42px)에 맞춘다 */
-  .guide-kakao{display:inline-flex;line-height:0;border-radius:10px;transform:translateX(42px)}
+  .guide-kakao{display:inline-flex;flex:none;line-height:0;border-radius:10px;transform:translateX(42px)}
   .guide-kakao:hover{opacity:.88}
-  .guide-kakao svg{width:34px;height:34px;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.18))}
+  .guide-kakao svg{width:34px;height:34px;flex:none;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.18))}
   .menu-item{position:relative;display:flex}
   .menu-item > a{display:inline-flex;align-items:center;gap:6px}
   .menu-item .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.65;transition:transform .2s ease}
@@ -387,6 +387,14 @@
   .mission-card .sec-title{margin-bottom:12px}
   .mission-card .sec-h{margin-bottom:12px}
   .mission-card .lead{font-size:15px}
+  /* 문의하기 운영지침 창 */
+  .guide-heading{font-family:'UPeopleGothic','유앤피플 고딕 UNI','UNPEOPLE Gothic UNI','유앤피플 고딕체','UNPEOPLE Gothic',"Noto Serif KR",serif;font-size:17px;font-weight:700;line-height:1.6;margin:22px 0 0;text-align:center;color:var(--text)}
+  .guide-verse{margin:20px auto 0;max-width:560px;padding:20px 22px;background:var(--surface-soft);border-radius:14px;text-align:center}
+  .guide-verse p{font-family:'UPeopleGothic','유앤피플 고딕 UNI','UNPEOPLE Gothic UNI','유앤피플 고딕체','UNPEOPLE Gothic',"Noto Serif KR",serif;font-size:15.5px;line-height:1.9;margin:0;color:var(--text)}
+  .guide-verse .ref{display:block;margin-top:10px;font-size:13px;color:var(--accent);font-weight:700;letter-spacing:.04em}
+  .guide-body{max-width:620px;margin:24px auto 0;text-align:left}
+  .guide-body p{font-size:14.5px;line-height:1.9;margin:0 0 16px;color:var(--text)}
+  .guide-body p:last-child{margin-bottom:0}
   .map-wrap{max-width:700px;margin:26px auto 4px}
   .map-frame{
     border-radius:20px;overflow:hidden;
@@ -856,7 +864,13 @@
           <a href="#mission" id="missionOpen">돕는선교</a>
         </div>
       </div>
-      <a href="#contact">문의하기</a>
+      <div class="menu-item" id="contactItem">
+        <a href="#contact" id="contactMenu" aria-haspopup="true" aria-expanded="false" aria-controls="contactSubmenu">문의하기<span class="caret" aria-hidden="true"></span></a>
+        <div class="submenu" id="contactSubmenu">
+          <a href="#contact" id="contactLink">문의하기</a>
+          <a href="#guide" id="guideOpen">운영방향</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -1421,6 +1435,23 @@
   </div>
 </div>
 
+<div class="mission-modal" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+  <div class="mission-card">
+    <button class="mission-close" id="guideClose" type="button" aria-label="운영방향 닫기">✕</button>
+    <p class="sec-title">Our Direction</p>
+    <h2 class="sec-h" id="guideTitle">운영방향</h2>
+    <p class="guide-heading">한국교회의 치유와 회복을 꿈꾸는 온교회</p>
+    <div class="guide-verse">
+      <p>&ldquo;상심한 자들을 고치시며 그들의 상처를 싸매시는도다.&rdquo;</p>
+      <span class="ref">시편 147편 3절</span>
+    </div>
+    <div class="guide-body">
+      <p>온교회는 한국교회의 치유와 회복을 소망하며 세워진 온라인 신앙공동체입니다. 교회에서 상처를 입었거나 오랫동안 교회에 발걸음하기 어려웠던 분들이 각자의 속도로 말씀을 듣고, 기도하며, 다시 예배할 수 있는 자리를 마련합니다.</p>
+      <p>온교회에서 다시 드린 예배가 가까운 동네 교회로 이어지는 작은 씨앗이 되기를 바랍니다. 마음이 준비되었을 때, 삶의 터전 가까이에서 함께 예배하고 서로의 안부를 묻는 신앙공동체를 만나기를 소망합니다. 한 사람의 마음을 돌보시는 주님의 사랑이 우리 동네 교회로 이어져, 한국교회의 치유와 회복으로 열매 맺기를 기도합니다.</p>
+    </div>
+  </div>
+</div>
+
 <section id="notice">
   <div class="sec-in">
     <p class="sec-title">Notice</p>
@@ -1613,7 +1644,7 @@
 </footer>
 
 <div class="guide-stack">
-  <a class="guide-kakao" href="https://open.kakao.com/o/sW5MwyVi" target="_blank" rel="noopener noreferrer" aria-label="카카오톡 오픈채팅으로 예배 신청·문의하기"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6.5" fill="#fee500"/><path d="M12 5.4c-3.9 0-7 2.5-7 5.6 0 2 1.3 3.8 3.3 4.8-.1 1.1-.6 2.4-1.5 3.3 1.3-.1 3.1-.9 4.3-1.9.4.1.9.1 1.4.1 3.9 0 7-2.5 7-5.6s-3.1-5.6-7-5.6z" fill="#3a1d1d"/><text x="12" y="12.9" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="4.4" font-weight="700" letter-spacing=".02em" fill="#fee500">TALK</text></svg></a>
+  <a class="guide-kakao" href="https://open.kakao.com/o/sW5MwyVi" target="_blank" rel="noopener noreferrer" aria-label="카카오톡 오픈채팅으로 예배 신청·문의하기"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6.5" fill="#fee500"/><path d="M5.6 10.9 A6.4 5.7 0 1 1 18.4 10.9 A6.4 5.7 0 0 1 8.6 15.7 L6.6 19.4 L7.2 14.7 A6.4 5.7 0 0 1 5.6 10.9 Z" fill="#3a1d1d"/><text x="12" y="12.45" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="4.1" font-weight="700" letter-spacing=".03em" fill="#fee500">TALK</text></svg></a>
   <a class="guide-insta" href="https://www.instagram.com/onchurch.me/" target="_blank" rel="noopener noreferrer" aria-label="온교회 인스타그램 (@onchurch.me)"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="instaGradGuide" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#feda75"/><stop offset=".35" stop-color="#fa7e1e"/><stop offset=".62" stop-color="#d62976"/><stop offset=".85" stop-color="#962fbf"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect x="1" y="1" width="22" height="22" rx="6.5" fill="url(#instaGradGuide)"/><g fill="none" stroke="#fff" stroke-width="1.8"><rect x="5.4" y="5.4" width="13.2" height="13.2" rx="4"/><circle cx="12" cy="12" r="3.3"/></g><circle cx="16.8" cy="7.2" r="1.15" fill="#fff"/></svg></a>
   <button class="chat-fab guide-fab" id="chatFab" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="chatPanel">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
@@ -1729,6 +1760,7 @@
   var catModal = setupModal('catFab', 'catechismModal', 'catClose');
   var offerModal = setupModal('offerOpen', 'offerModal', 'offerClose');
   var bibleModal = setupModal('bibleOpen', 'bibleModal', 'bibleClose');
+  var guideModal = setupModal('guideOpen', 'guideModal', 'guideClose');
 
   /* ---------- 우리 동네 교회 (상단 메뉴) — 전국 지도 + 동네 검색 ----------
      등록 교회 목록은 이 홈페이지 PARTNERS(함께 걷는 협력)에 실린 교회들이다.
@@ -2170,7 +2202,7 @@
   });
 
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape'){ missionModal.close(); catModal.close(); offerModal.close(); prayerModal.close(); bibleModal.close(); roomModal.close(); neighborModal.close(); }
+    if (e.key === 'Escape'){ missionModal.close(); catModal.close(); offerModal.close(); prayerModal.close(); bibleModal.close(); roomModal.close(); neighborModal.close(); guideModal.close(); }
   });
   var missionOfferingLink = document.getElementById('missionOfferingLink');
   if (missionOfferingLink) missionOfferingLink.addEventListener('click', function(e){ e.preventDefault(); missionModal.close(); offerModal.open(); });
@@ -2237,6 +2269,32 @@
     if (offerOpenLink) offerOpenLink.addEventListener('click', function(){ setOfferSubmenu(false); });
     var missionOpenLink = document.getElementById('missionOpen');
     if (missionOpenLink) missionOpenLink.addEventListener('click', function(){ setOfferSubmenu(false); });
+  }
+
+  /* ---------- 문의하기 하위 메뉴 (문의하기·운영지침 펼치기/접기) ---------- */
+  var contactItem = document.getElementById('contactItem');
+  var contactMenu = document.getElementById('contactMenu');
+  function setContactSubmenu(open){
+    if (!contactItem || !contactMenu) return;
+    contactItem.classList.toggle('open', open);
+    contactMenu.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (contactMenu && contactItem){
+    contactMenu.addEventListener('click', function(e){
+      /* 바로 섹션으로 이동하지 않고, 하위 메뉴만 펼치거나 접는다 */
+      e.preventDefault();
+      setContactSubmenu(!contactItem.classList.contains('open'));
+    });
+    document.addEventListener('click', function(e){
+      if (!contactItem.contains(e.target)) setContactSubmenu(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') setContactSubmenu(false);
+    });
+    var contactLink = document.getElementById('contactLink');
+    if (contactLink) contactLink.addEventListener('click', function(){ setContactSubmenu(false); });
+    var guideOpenLink = document.getElementById('guideOpen');
+    if (guideOpenLink) guideOpenLink.addEventListener('click', function(){ setContactSubmenu(false); });
   }
 
   /* ---------- Catechism search ---------- */
